@@ -58,8 +58,17 @@ int hash_strings(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
  
   int c;
-  while ((c = getopt(argc, argv, "fv")) != -1) {
+  while ((c = getopt(argc, argv, "fhv")) != -1) {
     switch (c) {
+      case 'h':
+        putchar('\n');
+        printf("%s: encrypt strings/files via SHA1. Reads from stdin if no args.\n", 
+          argv[0]);
+        printf("usage: %s [-f] [-v] [arg1 arg2 ...]\n", argv[0]);
+        printf("-f: treat args as filenames (default: string values)\n");
+        printf("-v: verbose output\n");
+        putchar('\n');
+        return 0;
       case 'f':
         fflag = true;
         break;

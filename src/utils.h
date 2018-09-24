@@ -1,6 +1,7 @@
 #ifndef _utils_h_
 #define _utils_h_
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #define ENOARGS -1
@@ -15,5 +16,6 @@ void print_bits(const void *p, size_t nbytes);
 uint32_t choose(uint32_t b, uint32_t c, uint32_t d);
 uint32_t parity(uint32_t b, uint32_t c, uint32_t d);
 uint32_t majority(uint32_t b, uint32_t c, uint32_t d);
+char *strread(FILE *fp);
 
 #endif

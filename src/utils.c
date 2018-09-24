@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 void clear_opts(int *p_argc, char **p_argv[], int *p_optind) {
   (*p_argv)[*p_optind - 1] = (*p_argv)[0]; \
@@ -48,6 +49,31 @@ uint32_t parity(uint32_t b, uint32_t c, uint32_t d) {
 
 uint32_t majority(uint32_t b, uint32_t c, uint32_t d) {
   return (b & c) | (b & d) | (c & d);
+}
+
+char *strread(FILE *fp) {
+  char *buf, *tmp;
+  size_t size = 1;
+  size_t pos = 0;
+  size_t bytes_read;
+  buf = malloc(size);
+  if (buf == NULL) return NULL;
+  while (fgets(buf + pos, size - pos, fp) != NULL) {
+    bytes_read = strlen(buf + pos);
+    pos += bytes_read;
+    if (pos == size - 1) {
+      tmp = realloc(buf, (size <<= 1));
+      if (tmp == NULL) {
+        break;
+      }
+      buf = tmp;
+    }
+  }
+  if (ferror(fp) || tmp == NULL) {
+    free(buf);
+    return NULL;
+  }
+  return buf;
 }
 
 
