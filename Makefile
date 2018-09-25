@@ -9,4 +9,4 @@ bin/base64: src/exec_base64.c src/base64.c src/utils.c
 .PHONY: clean
 
 clean:
-	rm bin/*
+	rm bin/sha1 bin/base64

@@ -6,6 +6,8 @@
 #include <string.h>
 #include "utils.h"
 
+/* Note - this is meant to work on little-endian architectures */ 
+
 #define ROTATE_LEFT(x, k) \
   (((x) << (k) % 32) | ((x) >> (32 - (k) % 32)))
 
@@ -126,7 +128,7 @@ void sha1_digest(struct sha1_session *sp, const void *bytes, size_t n) {
 }
 
 ssize_t sha1_sdigest(struct sha1_session *sp, const char *str) {
-  size_t len = strlen(str); //TODO enforce length requirement?
+  size_t len = strlen(str);
   sha1_digest(sp, (uint8_t*) str, len);
   return len;
 }
